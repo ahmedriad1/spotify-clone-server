@@ -14,8 +14,8 @@ class CreateSongsTable extends Migration
             $table->float('duration');
             $table->text('song_path');
             $table->foreignId('playlist_id');
-            $table->float('upload_duration');
-            $table->bigInteger('likes');
+            $table->float('upload_percent')->default(0);
+            $table->bigInteger('likes')->default(0);
             $table->timestamps();
         });
     }
