@@ -11,6 +11,7 @@ class CreatePlaylistsTable extends Migration
         Schema::create('playlists', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('artist');
             $table->text('description');
             $table->text('image');
             $table->bigInteger('likes')->default(0);

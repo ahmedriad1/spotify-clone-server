@@ -11,7 +11,8 @@ class CreateSongsTable extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('duration');
+            $table->string('artist')->nullable();
+            $table->float('duration')->default(0);
             $table->text('song_path');
             $table->foreignId('playlist_id');
             $table->float('upload_percent')->default(0);

@@ -19,6 +19,7 @@ class PlaylistsTableSeeder extends Seeder
             'name' => 'Test',
             'description' => 'this is a test',
             'image' => $name,
+            'artist' => 'test artist'
         ]);
 
         $original_name = '1.jpg';
@@ -31,6 +32,7 @@ class PlaylistsTableSeeder extends Seeder
             'name' => 'Test 2',
             'description' => 'this is a test',
             'image' => $name,
+            'artist' => 'test artist 2'
         ]);
     }
 }

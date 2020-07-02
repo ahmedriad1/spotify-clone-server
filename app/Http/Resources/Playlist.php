@@ -15,7 +15,8 @@ class Playlist extends JsonResource
             'image' => $this->image_path,
             'songs' => \App\Http\Resources\Song::collection($this->uploadedSongs),
             'category_id' => $this->category_id,
-            'total_duration' => $this->uploadedSongs()->sum('duration')
+            'total_duration' => $this->uploadedSongs()->sum('duration'),
+            'artist' => $this->artist
         ];
     }
 } // END OF RESOURCE

@@ -14,6 +14,7 @@ class Song extends JsonResource
             'likes' => $this->likes,
             'song_path' => url('storage/songs/' . $this->song_path),
             'duration' => $this->duration,
+            'artist' => $this->artist
         ];
     }
 } // END OF RESOURCE
