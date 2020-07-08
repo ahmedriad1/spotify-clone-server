@@ -6,6 +6,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Intervention\Image\Exception\NotReadableException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -75,6 +76,8 @@ class Handler extends ExceptionHandler
             $data = ['status' => 405, 'message' => 'Method not supported. Supported methods: ' . $exception->getHeaders()['Allow']];
         } else if ($exception instanceof ValidationException) {
             $data = ['status' => 422, 'message' => 'Invalid data.', 'errors' => $exception->validator->messages()->messages()];
+        } else if ($exception instanceof NotReadableException) {
+            $data = ['status' => 404, 'message' => 'Not found'];
         }
         return response()->json($data, $data['status']);
     }

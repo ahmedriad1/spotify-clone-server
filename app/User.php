@@ -24,6 +24,7 @@ class User extends Authenticatable implements JWTSubject
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
     ];
 
     public function getJWTIdentifier()
@@ -39,11 +40,11 @@ class User extends Authenticatable implements JWTSubject
 
     public function songLikes()
     {
-        return $this->hasMany(Song::class)->using(SongLike::class);
+        return $this->belongsToMany(Song::class, 'song_likes');
     }
 
     public function playlistLikes()
     {
-        return $this->hasMany(Playlist::class)->using(PlaylistLike::class);
+        return $this->belongsToMany(Playlist::class, 'playlist_likes');
     }
 } // END OF MODEL

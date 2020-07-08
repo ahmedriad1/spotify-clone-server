@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Playlist extends Model
 {
     protected $guarded = [];
-    protected $hidden = ['image'];
+    protected $hidden = ['image', 'pivot'];
     protected $appends = ['image_path'];
 
     public function songs()
@@ -20,6 +20,11 @@ class Playlist extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function likes()
+    {
+        return $this->hasMany(PlaylistLike::class);
+    }
+
     public function uploadedSongs()
     {
         return $this->songs()->where('upload_percent', '>=', 100);
@@ -27,7 +32,7 @@ class Playlist extends Model
 
     public function getImagePathAttribute()
     {
-        return url('/storage/playlists/' . $this->image);
+        return url('/api/images/' . explode('.', $this->image)[0]);
     }
 
     public function getSongsAttribute()

@@ -7,16 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Song extends Model
 {
     protected $guarded = [];
-    // protected $hidden = ['song_path'];
-    // protected $appends = ['song_path'];
+    protected $hidden = ['pivot', 'song_path'];
+    protected $appends = ['song'];
 
     public function playlist()
     {
         return $this->belongsTo(Playlist::class);
     }
 
-    // public function getSongPathAttribute()
-    // {
-    //     return url('/storage/songs/' . $this->song_path);
-    // }
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'song_likes');
+    }
+
+    public function getSongAttribute()
+    {
+        return url('/storage/songs/' . $this->song_path);
+    }
 } // END OF MODEL
