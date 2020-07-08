@@ -123,6 +123,7 @@ class PlaylistController extends Controller
     public function delete(Playlist $playlist)
     {
         Storage::disk('public')->delete('playlists/' . $playlist->image);
+        $playlist->likes()->delete();
         $playlist->delete();
         return response()->json([
             'status' => 200,
