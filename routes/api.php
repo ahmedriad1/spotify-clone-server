@@ -55,7 +55,11 @@ Route::prefix('search')->group(function () {
 });
 
 Route::prefix('songs')->group(function () {
+    Route::get('/', 'SongController@index');
     Route::post('/', 'SongController@store');
+    Route::post('/{song:id}/edit', 'SongController@edit');
+    Route::put('/{song:id}', 'SongController@update');
+    Route::delete('/{song:id}', 'SongController@destroy');
 });
 
 Route::get('/test', function () {

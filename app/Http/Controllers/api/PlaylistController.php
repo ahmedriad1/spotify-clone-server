@@ -8,6 +8,7 @@ use App\Http\Resources\AdminPlaylist;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\Playlist as PlaylistResource;
 use App\Playlist;
+use App\PlaylistLike;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -123,7 +124,7 @@ class PlaylistController extends Controller
     public function delete(Playlist $playlist)
     {
         Storage::disk('public')->delete('playlists/' . $playlist->image);
-        $playlist->likes()->delete();
+        PlaylistLike::where('playlist_id', $playlist->id)->delete();
         $playlist->delete();
         return response()->json([
             'status' => 200,
